@@ -1,0 +1,77 @@
+
+<div class="home">
+  <h2>Błyskawicznie wstaw ofertę!</h2>
+
+
+
+  <button class="button__Form"
+  (click)="toggleForm()"
+  [class.pulsate]="!showForm"
+>
+  <i
+    class="fas fa-angle-down icon-toggle"
+    [class.animate-up]="showForm"
+    [class.animate-down]="!showForm && initialState"
+  ></i>
+
+  <i
+    class="fas fa-angle-up icon-toggle"
+    [class.animate-down2]="showForm"
+    [class.animate-up2]="!showForm && initialState"
+    [class.hidden]="!initialState"
+  ></i>
+</button>
+</div>
+
+@if (showForm) {
+
+  <form class="form__container" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Stanowisko</mat-label>
+    <input matInput formControlName="title" />
+    @if (form.controls.title.touched && form.controls.title.hasError('required')) {
+      <mat-error>To pole jest wymagane.</mat-error>
+    }
+    @else {
+      @if (form.controls.title.hasError('maxlength')) {
+        <mat-error>Maks 21 znaków.</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Firma</mat-label>
+    <input matInput formControlName="company" />
+    @if (form.controls.company.touched && form.controls.company.hasError('required')) {
+      <mat-error>To pole jest wymagane.</mat-error>
+    }
+    @else {
+      @if (form.controls.company.hasError('maxlength')) {
+        <mat-error>Maks 21 znaków.</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Lokalizacja</mat-label>
+    <input matInput formControlName="location" />
+    @if (form.controls.location.touched && form.controls.location.hasError('required')) {
+      <mat-error>To pole jest wymagane.</mat-error>
+    }
+    @else {
+      @if (form.controls.location.hasError('maxlength')) {
+        <mat-error>Maks 21 znaków.</mat-error>
+      }
+    }
+  </mat-form-field>
+
+  <button class="form__button" mat-raised-button color="primary" type="submit">
+    Dodaj ofertę
+  </button>
+</form>
+
+}
+
+
+

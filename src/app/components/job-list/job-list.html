@@ -1,0 +1,61 @@
+
+<div class="searchbar">
+
+  <button  mat-raised-button (click)="toggleFavFilter()">
+    @if (showFavOnly()) { Wszystkie } @else { Ulubione }
+  </button>
+
+  <mat-form-field appearance="outline" class="search">
+    <mat-label>Szukaj stanowiska</mat-label>
+    <input matInput
+    [value]="searchTerm()"
+    (input)="searchTerm.set($any($event.target).value)"
+    placeholder="Szukaj...">
+  </mat-form-field>
+</div>
+
+@if (pagedJobs().length) {
+<table mat-table [dataSource]="pagedJobs()" class="mat-elevation-z1">
+
+
+    <ng-container matColumnDef="title">
+      <th class="header" mat-header-cell *matHeaderCellDef>Stanowisko</th>
+      <td mat-cell *matCellDef="let job">{{ job.title }}</td>
+    </ng-container>
+    <ng-container matColumnDef="company">
+      <th mat-header-cell *matHeaderCellDef>Firma</th>
+      <td mat-cell *matCellDef="let job">{{ job.company }}</td>
+    </ng-container>
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef>Lokalizacja</th>
+      <td mat-cell *matCellDef="let job">{{ job.location }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Akcje</th>
+      <td mat-cell *matCellDef="let job">
+
+        <button mat-icon-button color="primary" (click)="favToggle.emit(job.id)">
+          @if (favorites().has(job.id)) { 
+            <mat-icon class="star">star</mat-icon>
+          } @else {
+            <mat-icon>star_border</mat-icon>
+          }
+        </button>
+        <button mat-icon-button color="warn" (click)="remove.emit(job.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row       *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+  <div class="pagination">
+    <button mat-button (click)="goPrev()" [disabled]="currentPage()===1">‹ Poprzednia</button>
+    <span> {{ currentPage() }} / {{ totalPages() }}</span>
+    <button mat-button (click)="goNext()" [disabled]="currentPage()===totalPages()">Następna ›</button>
+  </div>
+} @else {
+  <p class="information">Brak ofert do wyświetlenia.</p>
+}

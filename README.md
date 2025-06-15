@@ -1,59 +1,79 @@
-# Safwork
+Safwork
+A small Angular 20 “job board” demo app showcasing:
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
+Standalone components
 
-## Development server
+Signals for state management
 
-To start a local development server, run:
+LocalStorage persistence
 
-```bash
-ng serve
-```
+Reactive forms (with validation)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Favorites toggle
 
-## Code scaffolding
+Instant search (with persistence)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Pagination
 
-```bash
-ng generate component component-name
-```
+Angular Material styling
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+E2E tests with Playwright
 
-```bash
-ng generate --help
-```
+Prerequisites
+Node.js ≥ 18
 
-## Building
+npm ≥ 8
 
-To build the project run:
+Installation
 
-```bash
-ng build
-```
+git clone <your-repo-url>
+cd safwork
+npm install
+Available Scripts
+Command	What it does
+ng serve	Run the dev server at http://localhost:4200
+ng build	Build the app for production (in dist/)
+npm run e2e	Run Playwright E2E tests (headless)
+npm run e2e:headed	Run Playwright E2E tests in headed mode
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Features
+Reactive Forms & Validation
+– Three required fields (title, company, location)
+– Max length: 21 characters
 
-## Running unit tests
+Signals & LocalStorage
+– jobsSignal: Signal<Job[]> holds job listings
+– favSignal: Signal<Set<number>> tracks favorites
+– effect(...) automatically syncs both to localStorage
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Search & Filter
+– searchTerm = signal<string>()
+– filteredJobs = computed(...) filters by title, company, or location
+– Search term persists after page reload
 
-```bash
-ng test
-```
+Favorites Toggle
+– Click the star icon to toggle a favorite
+– “Ulubione / Wszystkie” button filters the list
 
-## Running end-to-end tests
+Pagination
+– pageSize = 10
+– currentPage = signal(1)
+– pagedJobs = computed(...) slices filteredJobs()
+– Prev / Next buttons navigate pages
 
-For end-to-end (e2e) testing, run:
+Styling
+– Uses Angular Material components (buttons, inputs, table, snackbar)
 
-```bash
-ng e2e
-```
+E2E Testing
+We use Playwright to verify core flows:
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Adding a job
 
-## Additional Resources
+Deleting a job
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+npm run e2e       
+npm run e2e:headed  
+
+Tests live under the e2e/ directory and each run starts from a clean state.
+
