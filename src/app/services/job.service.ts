@@ -13,8 +13,21 @@ export type NewJob = Pick<Job, 'title' | 'company' | 'location'>;
 export class JobService {
   private readonly jobsSignal = signal<Job[]>(
     JSON.parse(localStorage.getItem('jobs') || 'null') ?? [
-      { id: 1, title: 'Frontend Developer', company: 'Acme', location: 'Warszawa' },
-      { id: 2, title: 'Backend Developer',  company: 'Beta', location: 'Kraków'  }
+     { id:  1, title: 'Angular Developer',       company: 'NexaSoft',              location: 'Warszawa' },
+    { id:  2, title: 'React Engineer',          company: 'BlueWave Technologies', location: 'Kraków'  },
+    { id:  3, title: 'Vue.js Developer',        company: 'CloudPrime',            location: 'Gdańsk'  },
+    { id:  4, title: 'Full-Stack Developer',    company: 'DataWave Solutions',    location: 'Wrocław' },
+    { id:  5, title: 'Backend Developer (Node)',company: 'SecureNet',             location: 'Poznań'  },
+    { id:  6, title: 'Python Developer',        company: 'AstraData',             location: 'Katowice'},
+    { id:  7, title: 'Java Developer',          company: 'CoreLogic',             location: 'Łódź'     },
+    { id:  8, title: 'C#/.NET Developer',       company: 'FinTech Innovations',   location: 'Lublin'  },
+    { id:  9, title: 'PHP Developer',           company: 'WebSphere AG',          location: 'Bydgoszcz'},
+    { id: 10, title: 'SQL Developer',           company: 'DataSphere Solutions',  location: 'Szczecin'},
+    { id: 11, title: 'DevOps Engineer',         company: 'InfraWorks',            location: 'Rzeszów' },
+    { id: 12, title: 'Data Engineer',           company: 'InsightAnalytics',      location: 'Warszawa' },
+    { id: 13, title: 'Machine Learning Engineer',company: 'Neuronix AI',          location: 'Kraków'   },
+    { id: 14, title: 'Mobile Developer (iOS)',  company: 'AppCraft Studio',       location: 'Gdynia'   },
+
     ]
   );
 
